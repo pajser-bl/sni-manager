@@ -9,7 +9,7 @@ import (
 	"log"
 	"net/http"
 	"sni-admin/user"
-	"sni-management/article"
+	"sni-manager/article"
 	"strconv"
 )
 
