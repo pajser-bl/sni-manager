@@ -3,14 +3,11 @@ package main
 import (
 	"github.com/go-redis/redis/v8"
 	"github.com/gorilla/mux"
-	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 	"html/template"
 	"log"
 	"net/http"
-	"sni-admin/user"
 	"sni-manager/article"
-	"strconv"
 )
 
 func GetUserType(req *http.Request) int {
@@ -37,22 +34,22 @@ func articlesHandler(res http.ResponseWriter, req *http.Request) {
 		if req.Method == "GET" {
 			_ = t.Execute(res, Articles)
 		} else if req.Method == "POST" {
-			un := template.HTMLEscapeString(req.FormValue("username"))
-			fn := template.HTMLEscapeString(req.FormValue("firstname"))
-			ln := template.HTMLEscapeString(req.FormValue("lastname"))
-			pw := template.HTMLEscapeString(req.FormValue("password"))
-			typ, _ := strconv.Atoi(template.HTMLEscapeString(req.FormValue("type")))
-			ph, _ := bcrypt.GenerateFromPassword([]byte(pw), 14)
-			if un != "" && fn != "" && ln != "" && pw != "" {
-				_, err := user.Create(db, &user.User{Username: un, FirstName: fn, LastName: ln, PasswordHash: string(ph), Type: uint8(typ)})
-				if err != nil {
-					panic(err.Error())
-				}
-				Articles, _ = article.GetAllArticles(db)
-				_ = t.Execute(res, Articles)
-			} else {
-				http.Redirect(res, req, "https://localhost/manager/articles", http.StatusSeeOther)
-			}
+			//un := template.HTMLEscapeString(req.FormValue("username"))
+			//fn := template.HTMLEscapeString(req.FormValue("firstname"))
+			//ln := template.HTMLEscapeString(req.FormValue("lastname"))
+			//pw := template.HTMLEscapeString(req.FormValue("password"))
+			//typ, _ := strconv.Atoi(template.HTMLEscapeString(req.FormValue("type")))
+			//ph, _ := bcrypt.GenerateFromPassword([]byte(pw), 14)
+			//if un != "" && fn != "" && ln != "" && pw != "" {
+			//	_, err := user.Create(db, &user.User{Username: un, FirstName: fn, LastName: ln, PasswordHash: string(ph), Type: uint8(typ)})
+			//	if err != nil {
+			//		panic(err.Error())
+			//	}
+			//	Articles, _ = article.GetAllArticles(db)
+			//	_ = t.Execute(res, Articles)
+			//} else {
+			//	http.Redirect(res, req, "https://localhost/manager/articles", http.StatusSeeOther)
+			//}
 		}
 	}
 }

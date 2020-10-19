@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
-	"sni-admin/user"
+	"sni-manager/user"
 	"strconv"
 	"time"
 )
